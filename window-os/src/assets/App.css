@@ -1,0 +1,61 @@
+/* html, body, #root, .dimmer {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+} */
+
+html, body, #root, #app, #app>div, .dimmer, .App {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  height: 100%;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+}
+
+.gui-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 10rem;
+  color: black;
+  font-size: 2rem;
+
+
+  margin: 5rem;
+  align-self: flex-end;
+}
+
+.weather-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1rem;
+
+  width: 100%;
+}
+
+.weather-icon > img {
+  width: 5rem;
+}
+
+.weather-text {
+  margin: 0px !important;
+}
+
+.weather-text > h2 {
+  margin: 0px !important;
+}
+
+.weather-text > p {
+  margin: 0px !important;
+  line-height: .8;
+}
+
+.feature-panel {
+
+}
