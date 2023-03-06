@@ -31,7 +31,7 @@ setInterval(() => {
       throw err;
     }
     console.log(value);
-    console.log('Current temperature sensor value:', float(value)/1000);
+    console.log('Current temperature sensor value:', parseFloat(value)/1000);
     // TODO: Perform temperature conversion/calculations on the sensor value here
   });
 }, readIntervalMs);
