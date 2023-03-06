@@ -9,6 +9,10 @@ const LIGHT = 27;
 // Initialize the GPIO library
 rpio.init({mapping: 'gpio'});
 
+// Make sure closed
+rpio.close(TEMP);
+rpio.close(LIGHT);
+
 // Set the pin to input mode
 rpio.open(TEMP, rpio.INPUT);
 rpio.open(LIGHT, rpio.INPUT);
