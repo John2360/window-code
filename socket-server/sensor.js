@@ -9,7 +9,9 @@ const LIGHT = 13;
 rpio.init({mapping: 'gpio'});
 
 // Set the pin to input mode
-rpio.open(SENSOR_PIN, rpio.INPUT);
+rpio.open(TEMP, rpio.INPUT);
+rpio.open(LIGHT, rpio.INPUT);
+
 
 // Read the pin value
 const valueTemp = rpio.read(TEMP);
