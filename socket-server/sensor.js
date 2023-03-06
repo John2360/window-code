@@ -1,32 +1,27 @@
-const rpio = require('rpio');
+const gpio = require('onoff').Gpio;
 
-// Set up the pin number to read from
-//const TEMP = 11;
-//const LIGHT = 13;
-const TEMP = 17;
-const LIGHT = 27;
+const tempSensor = new gpio(17, 'in', 'both');
+const lightSensor = new gpio(27, 'in', 'both');
 
-// Initialize the GPIO library
-rpio.init({mapping: 'gpio'});
+tempSensor.watch(function (err, value) { //Watch for hardware interrupts on pushButton GPIO, specify callback function
+  if (err) { //if an error
+    console.error('There was an error', err); //output error message to console
+  return;
+  }
+  console.log(`The tempature sensor value is ${value}`);
+});
 
-// Set the pin to input mode
-rpio.open(TEMP, rpio.INPUT);
-rpio.open(LIGHT, rpio.INPUT);
-
-
-// Read the pin value
-const valueTemp = rpio.read(TEMP);
-const valueLight = rpio.read(LIGHT);
-
-
-var count = 0
-// Print the sensor value to the console
-while (count < 1000) {
-    console.log(`Sensor value light: ${valueLight}`);
-    console.log(`Sensor value temp: ${valueTemp}`);
-    count++;
-}
-
-// Clean up the GPIO library
-rpio.close(TEMP);
-rpio.close(LIGHT);
+lightSensor.watch(function (err, value) { //Watch for hardware interrupts on pushButton GPIO, specify callback function
+  if (err) { //if an error
+    console.error('There was an error', err); //output error message to console
+  return;
+  }
+  console.log(`The tempature sensor value is ${value}`);
+});
+  
+function unexportOnClose() { //function to run when exiting program
+  tempSensor.unexport(); // Unexport Button GPIO to free resources
+  lightSensor.unexport(); // Unexport Button GPIO to free resources
+};
+  
+process.on('SIGINT', unexportOnClose); //function to run when user closes using ctrl+c
