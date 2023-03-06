@@ -21,7 +21,7 @@ gpio.setup(sensorPin, gpio.DIR_IN, gpio.EDGE_BOTH, (err) => {
 // }
 
 // Add a listener for changes in the sensor input
-gpio.on('change', onSensorChange);
+// gpio.on('change', onSensorChange);
 
 // Optional: Set up a periodic timer to read the sensor input at regular intervals
 const readIntervalMs = 1000; // Change this to set the desired interval for reading the sensor
