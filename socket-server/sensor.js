@@ -12,13 +12,13 @@ gpio.setup(sensorPin, gpio.DIR_IN, gpio.EDGE_BOTH, (err) => {
 });
 
 // Define a function to handle changes in the sensor input
-function onSensorChange(err, value) {
-  if (err) {
-    throw err;
-  }
-  console.log('Temperature sensor value changed to:', value);
-  // TODO: Perform temperature conversion/calculations on the sensor value here
-}
+// function onSensorChange(err, value) {
+//   if (err) {
+//     throw err;
+//   }
+//   console.log('Temperature sensor value changed to:', value);
+//   // TODO: Perform temperature conversion/calculations on the sensor value here
+// }
 
 // Add a listener for changes in the sensor input
 gpio.on('change', onSensorChange);
