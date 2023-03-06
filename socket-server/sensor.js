@@ -1,7 +1,9 @@
 const rpio = require('rpio');
 
 // Set up the pin number to read from
-const SENSOR_PIN = 12;
+const TEMP = 11;
+const LIGHT = 13;
+
 
 // Initialize the GPIO library
 rpio.init({mapping: 'gpio'});
@@ -10,10 +12,16 @@ rpio.init({mapping: 'gpio'});
 rpio.open(SENSOR_PIN, rpio.INPUT);
 
 // Read the pin value
-const sensorValue = rpio.read(SENSOR_PIN);
+const valueTemp = rpio.read(TEMP);
+const valueLight = rpio.read(LIGHT);
+
 
 // Print the sensor value to the console
-console.log(`Sensor value: ${sensorValue}`);
+while (true) {
+    console.log(`Sensor value light: ${valueLight}`);
+    console.log(`Sensor value temp: ${valueTemp}`);
+}
 
 // Clean up the GPIO library
-rpio.close(SENSOR_PIN);
+rpio.close(TEMP);
+rpio.close(LIGHT);
