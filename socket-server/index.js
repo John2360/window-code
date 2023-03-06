@@ -12,13 +12,6 @@ const io = socketIo(server, {
     }
 });
 
-const gpiop = require('rpi-gpio').promise;
-gpio.on('change', function(channel, value) {
-	console.log('Channel ' + channel + ' value is now ' + value);
-});
-gpio.setup(11, gpio.DIR_IN, gpio.EDGE_BOTH);
-gpio.setup(13, gpio.DIR_IN, gpio.EDGE_BOTH);
-
 app.use(cors());
 
 io.on('connection', (socket) => {

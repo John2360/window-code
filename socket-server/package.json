@@ -4,6 +4,7 @@
     "express": "^4.18.2",
     "http": "^0.0.1-security",
     "rpi-gpio": "^2.1.7",
+    "rpio": "^2.4.2",
     "socket.io": "^4.6.1"
   }
 }
