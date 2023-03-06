@@ -1,9 +1,10 @@
 const rpio = require('rpio');
 
 // Set up the pin number to read from
-const TEMP = 11;
-const LIGHT = 13;
-
+//const TEMP = 11;
+//const LIGHT = 13;
+const TEMP = 17;
+const LIGHT = 27;
 
 // Initialize the GPIO library
 rpio.init({mapping: 'gpio'});
