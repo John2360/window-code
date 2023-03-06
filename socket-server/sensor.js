@@ -9,10 +9,6 @@ const LIGHT = 27;
 // Initialize the GPIO library
 rpio.init({mapping: 'gpio'});
 
-// Make sure closed
-rpio.close(TEMP);
-rpio.close(LIGHT);
-
 // Set the pin to input mode
 rpio.open(TEMP, rpio.INPUT);
 rpio.open(LIGHT, rpio.INPUT);
@@ -23,10 +19,12 @@ const valueTemp = rpio.read(TEMP);
 const valueLight = rpio.read(LIGHT);
 
 
+var count = 0
 // Print the sensor value to the console
-while (true) {
+while (count < 1000) {
     console.log(`Sensor value light: ${valueLight}`);
     console.log(`Sensor value temp: ${valueTemp}`);
+    count++;
 }
 
 // Clean up the GPIO library
