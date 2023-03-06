@@ -11,7 +11,7 @@ socket.on("connect_error", (err) => {
 });
 
 function App() {
-  const [config, setConfig] = useState({'dim': false, 'ui': true, 'brightness': 0});
+  const [config, setConfig] = useState({'dim': false, 'ui': true, 'brightness': 0, 'temperature': {'current': 69, 'target': 69}});
 
   // get config from server
   useEffect(() => {

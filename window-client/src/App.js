@@ -1,7 +1,7 @@
 import './assets/App.css';
 import React, { useState, useEffect } from 'react';
 
-import Slider from 'rc-slider';
+import Slider, {SliderTooltip} from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
 import io from 'socket.io-client';
@@ -13,8 +13,21 @@ socket.on("connect_error", (err) => {
   console.log(`connect_error due to ${err.message}`);
 });
 
+// tempature slider
+const marks = {
+  50: '50 F',
+  55: '55 F',
+  60: '60 F',
+  65: '65 F',
+  70: '70 F',
+  75: '75 F',
+  80: '80 F',
+  85: '85 F',
+  90: '90 F',
+};
+
 function App() {
-  const [config, setConfig] = useState({'dim': false, 'ui': true, 'brightness': 0});
+  const [config, setConfig] = useState({'dim': false, 'ui': true, 'brightness': 0, 'temperature': {'current': 69, 'target': 70}});
   const delay = (ms) => new Promise((resolve, reject) => setTimeout(resolve, ms));
 
   const updateDim = (dim) => {
@@ -43,6 +56,18 @@ function App() {
     doDim().catch(console.error);
   }, [config.dim]);
 
+  useEffect(() => {
+    const doTemp = async () => {
+      const temp = config.temperature.target;
+
+      // logic to change temperature
+    }
+
+    doTemp().catch(console.error);
+  }, [config.temperature.target]);
+
+
+
   const updateUI = () => {
     setConfig({...config, 'ui': !config.ui});
   }
@@ -51,20 +76,16 @@ function App() {
     setConfig({...config, 'brightness': brightness/100});
   }
 
+  const updateTemperature = (temperature) => {
+    setConfig({...config, 'temperature': {'current': config.temperature.current, 'target': temperature}});
+  }
+
   // send config to server
   useEffect(() => {
     socket.emit('config-update', config);
     // debug
     // console.log(config);
   }, [config]);
-
-  // get config from server
-  // useEffect(() => {
-  //   socket.on('config-update', (data) => {
-  //     console.log(data);
-  //     setConfig(data);
-  //   });
-  // }, []);
 
   return (
     <div className="container">
@@ -82,6 +103,14 @@ function App() {
           <div className='form-group'>
             <h4 style={{marginBottom: '.5rem'}}>Window Brightness</h4>
             <Slider  min={0} max={100} onChange={updateBrightness} value={config.brightness*100} />
+          </div>
+        </div>
+        <div className='row'>
+          <div className='form-group'>
+            <h4 style={{marginBottom: '.5rem'}}>Passive Temperature (Current Temperature: 69 F&#176;)</h4>
+            <di className='row'>
+              <Slider defaultValue={config.temperature.target} min={32} max={110} marks={marks} onChange={updateTemperature} value={config.temperature.target} />
+            </di>
           </div>
         </div>
       </div>
