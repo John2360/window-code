@@ -2,7 +2,14 @@ const gpio = require('rpi-gpio');
 
 // Set up the GPIO pin connected to the temperature sensor
 const sensorPin = 17; // Change this to the GPIO pin number that your sensor is connected to
-gpio.setup(sensorPin, gpio.DIR_IN, gpio.EDGE_BOTH);
+gpio.setMode(gpio.MODE_BCM);
+
+gpio.setup(sensorPin, gpio.DIR_IN, gpio.EDGE_BOTH, (err) => {
+  if (err) {
+    throw err;
+  }
+  console.log('Temperature sensor pin set up');
+});
 
 // Define a function to handle changes in the sensor input
 function onSensorChange(err, value) {
