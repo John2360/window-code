@@ -30,6 +30,7 @@ setInterval(() => {
     if (err) {
       throw err;
     }
+    console.log(value);
     console.log('Current temperature sensor value:', value);
     // TODO: Perform temperature conversion/calculations on the sensor value here
   });
