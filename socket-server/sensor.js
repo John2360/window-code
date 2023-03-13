@@ -1,4 +1,4 @@
-import io from 'socket.io-client';
+const io = require('socket.io-client');
 
 // change to current IP address
 const server_ip = "http://10.38.4.110:3000";
