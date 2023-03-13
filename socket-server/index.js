@@ -25,6 +25,11 @@ io.on('connection', (socket) => {
     console.log(`received new config request from client ${socket.id}`);
     io.emit('config-update', data);
   });
+
+  socket.on('sensor-update', (data) => {
+    console.log(`received new sensor data from client ${socket.id}`);
+    io.emit('sensor-update', data);
+  });
 });
 
 const port = process.env.PORT || 3000;
