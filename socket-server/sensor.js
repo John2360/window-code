@@ -1,7 +1,7 @@
 const io = require('socket.io-client');
 
 // change to current IP address
-const server_ip = "http://10.38.4.110:3000";
+const server_ip = "http://localhost:3000";
 const socket = io.connect(server_ip);
 socket.on("connect_error", (err) => {
   console.log(`connect_error due to ${err.message}`);
