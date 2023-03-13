@@ -28,6 +28,7 @@ const marks = {
 
 function App() {
   const [config, setConfig] = useState({'dim': false, 'ui': true, 'brightness': 0, 'temperature': {'current': 69, 'target': 70}});
+  const [sensorData, setSensorData] = useState({'temperature': 0, 'light': 0});
   const delay = (ms) => new Promise((resolve, reject) => setTimeout(resolve, ms));
 
   const updateDim = (dim) => {
@@ -87,6 +88,13 @@ function App() {
     // console.log(config);
   }, [config]);
 
+  // receive sensor data from server
+  useEffect(() => {
+    socket.on('sensor-update', (data) => {
+      setSensorData(data);
+    });
+    }, []);
+
   return (
     <div className="container">
       <h1>Window OS Client</h1>
@@ -107,7 +115,13 @@ function App() {
         </div>
         <div className='row'>
           <div className='form-group'>
-            <h4 style={{marginBottom: '.5rem'}}>Passive Temperature (Current Temperature: 69 F&#176;)</h4>
+            <h4 style={{marginBottom: '.5rem'}}>Room Brightness</h4>
+            <Slider  min={0} max={1000} value={sensorData.light} />
+          </div>
+        </div>
+        <div className='row'>
+          <div className='form-group'>
+            <h4 style={{marginBottom: '.5rem'}}>Passive Temperature (Current Temperature: {sensorData.temperature} F&#176;)</h4>
             <di className='row'>
               <Slider defaultValue={config.temperature.target} min={32} max={110} marks={marks} onChange={updateTemperature} value={config.temperature.target} />
             </di>

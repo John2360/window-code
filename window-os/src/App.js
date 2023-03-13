@@ -12,6 +12,8 @@ socket.on("connect_error", (err) => {
 
 function App() {
   const [config, setConfig] = useState({'dim': false, 'ui': true, 'brightness': 0, 'temperature': {'current': 69, 'target': 69}});
+  const [sensorData, setSensorData] = useState({'temperature': 0, 'light': 0});
+  
 
   // get config from server
   useEffect(() => {
@@ -20,6 +22,12 @@ function App() {
       // console.log(data);
       setConfig(data);
     });
+
+    socket.on('sensor-update', (data) => {
+      // debug
+      // console.log(data);
+      setSensorData(data);
+    });
   }, []);
 
 
@@ -27,14 +35,17 @@ function App() {
     <div className='dimmer' style={{backgroundColor: `rgba(0, 0, 0, ${config.brightness})`}}>
       <div className="App" >
         <div className='gui-display'>
-          <div className='weather-container' style={{'display': config.ui ? 'flex' : 'none'}}>
-            <div className='weather-icon'>
-              <BsCloudSnow style={{fontSize: 75}} />
+          <div className='weather-wrapper' style={{'display': config.ui ? 'flex' : 'none'}}>
+            <div className='weather-container'>
+              <div className='weather-icon'>
+                <BsCloudSnow style={{fontSize: 75}} />
+              </div>
+              <div className='weather-text'>
+              <h2>31&#176;</h2>
+              <p>Snow</p>
+              </div>
             </div>
-            <div className='weather-text'>
-            <h2>31&#176;</h2>
-            <p>Snow</p>
-            </div>
+            <p>Inside Temperature {sensorData.temperature}&#176;</p>
           </div>
         </div>
       </div>
